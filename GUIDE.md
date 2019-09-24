@@ -6,54 +6,96 @@ tags: vault enterprise
 ---
 
 
-Often, when administering Vault Enterprise, after its deployment, you'll need to configure it.
-
 Much of the work after designing and planning is configuring Vault Enterprise via its API, or a wrapper of the API.
 
-However, there come times, especially when troubleshooting or automating something, when an admin of Vault Enterprise has to manage the state within Vault, itself, rather than just the configuration. 
+Often, when administering Vault Enterprise, after its deployment, you'll need to configure it.
+
+However, there come a time, especially when troubleshooting or automating anything, when an admin of Vault Enterprise has to manage the state within Vault itself, rather than just the configuration. To be more specific, performing house keeping on the platform.
 
 This is especially true if there is a problem, like potential undesired access or application misbehavior.
 
-What if you want to, as part of an investigation, you want to see all of the currently valid access tokens that were created on a specific day?
+What if, as part of an investigation, you want to see all of the currently valid access tokens that were created on a specific day?
 
-I'll show you a script that will do this for you. Before we do that, though, we'll set up a Vault to test on. You don't have to install anything, or write any configuration files.
+I've developed a script that will do this for you. Before we do that, though, we'll set up a Vault to test on. You don't have to install anything, or write any configuration files.
 
 ## Download Vault
 
-We'll download the binary for HashiCorp Vault, because we can use it to run an easy Vault server:
+First step requires the Vault binary from HashiCorp, which can be used to run a CLI started Vault Server. Download the correct binary for you platform from the following URL:
 
 https://www.vaultproject.io/downloads.html
 
-After you have downloaded and extracted the binary file, open a Terminal window.
+Extract the binary (preferrably to a location within your $PATH) and proceed to opening a terminal prompt.
 
-### If You're on a Mac, Open a Bash Terminal
+## Open Terminal
+### Mac Terminal
 
-Open your Applications folder, then Utilities and double-click on Terminal, or press Command + spacebar to launch Spotlight, then type "Terminal", and double-click on the search result. You'll see a small window with a white background open o your desktop.
+Open your `Applications > Utilities` and double-click on `Terminal`
+or
+press `Command + Spacebar` to launch Spotlight, type "Terminal", and double-click on the search result.
 
-### If you're on a Windows OS, Open a Shell Terminal
+If you have not
 
-Open the Run dialog by holding the `Windows` key, and pressing R once. Then, enter `cmd`. When you press the `Enter` key, after entering `cmd`, you will see a black window with white text.
+### Windows Terminal
 
-In your shell terminal that you just opened, use the `cd` command, along with the `dir` or `ls` commands, to navigate to where you downloaded Vault.
-
+Open the Run dialog by holding the `Windows + R`, then, type `powershell` and hit enter.
 
 ## Run a Vault Server
 
-Enter the following in the terminal when you have navigated your terminal to the folder in which you have downloaded and extracted Vault:
+The following command will start the Vault Server in dev mode:
+
+if in $PATH:
+
+`vault status`
+
+else:
+
+`cd PATH/TO/VAULT`
+
+`./vault status`
 
 `./vault server -dev -dev-root-token-id=root`
 
-You should see some output, from Vault, but you will not be able to enter more commands in this terminal. 
-
-To keep entering more commands, open another terminal, and navigate to the same folder in which you had downloaded and extracted Vault.
+Commands will no longer be able to be ran in this terminal. Open a second terminal prompt to the proceeding steps.
 
 ## Connect to Vault
 
-Mac: `export VAULT_TOKEN=root`
-`export VAULT_ADDR=http://127.0.0.1:8200`
-`./vault status`
+Mac:
+```bash
+export VAULT_TOKEN=root
+export VAULT_ADDR=http://127.0.0.1:8200
+```
+if in `$PATH`:
 
-The last command, the one with `status`, should show the status of your Vault. That shows that you can connect to it. 
+```bash
+vault status
+```
+
+else:
+
+```bash
+cd PATH/TO/VAULT
+./vault status
+```
+
+Windows:
+```powershell
+$VAULT_TOKEN='root'
+$VAULT_ADDR='http://127.0.0.1:8200'
+```
+if in `$env:PATH`:
+
+```powershell
+vault status
+```
+
+else:
+
+```powershell
+cd PATH/TO/VAULT
+./vault status
+```
+
+The last command, the one with `status`, should show the status of your Vault, and show that you can connect to it.
 
 ## Download the script
 
@@ -66,6 +108,6 @@ _(This part might not work on Windows, but please don't let me stop you from con
 
 `./list_accessor_issue_time.sh | grep 2019-09-13`
 
-If you wanted to search for a different day, say, September 20, 2019, you would run the following, instead: 
+If you wanted to search for a different day, say, September 20, 2019, you would run the following, instead:
 
 `./list_accessor_issue_time.sh | grep 2019-09-20`
