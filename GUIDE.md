@@ -5,14 +5,11 @@ description: A quick script to look up Vault tokens
 tags: vault enterprise
 ---
 
+After deploying Vault Enterprise, you'll need to initialize and configure it. Most of this configuration of Vault Enterprise happens via its API.
 
-After deploying Vault Enterprise, you'll need to initialize and configure it.
+Even beyond just configuration of Vault, there come times when an admin of Vault Enterprise has to manage the state within Vault, itself. 
 
-After Vault initialization, most configuration of Vault Enterprise happens via its API.
-
-However, there come times, especially when troubleshooting or automating something, when an admin of Vault Enterprise has to manage the state within Vault, itself, rather than just the configuration. 
-
-This is especially true if there is a problem, like potential undesired access or application misbehavior.
+You'll need to deal with Vault's state directly when testing automation or troubleshooting a problem, like potential undesired access or application misbehavior.
 
 What if you want to, as part of an investigation, you want to see all of the currently valid access tokens that were created on a specific day?
 
