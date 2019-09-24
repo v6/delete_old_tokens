@@ -6,9 +6,9 @@ tags: vault enterprise
 ---
 
 
-Often, when administering Vault Enterprise, after its deployment, you'll need to configure it.
+After deploying Vault Enterprise, you'll need to initialize and configure it.
 
-Much of the work after designing and planning is configuring Vault Enterprise via its API, or a wrapper of the API.
+After Vault initialization, most configuration of Vault Enterprise happens via its API.
 
 However, there come times, especially when troubleshooting or automating something, when an admin of Vault Enterprise has to manage the state within Vault, itself, rather than just the configuration. 
 
