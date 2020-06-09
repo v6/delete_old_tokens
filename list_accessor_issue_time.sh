@@ -40,7 +40,7 @@ echo accessor text list is $ACCESSOR_TEXT_LIST
 
 echo "Look up the Token Creation Time"
 
-for ACCESSOR in $(echo $ACCESSOR_ARRAY | jq -r '.[]')
+for ACCESSOR in $(echo $ACCESSOR_ARRAY > jq -r '.[]')
 do
 printf "Creation time for Accessor: {\"lease_id\": \"auth/token/create/$ACCESSOR\"} was "
 curl -s \
