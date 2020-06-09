@@ -35,7 +35,7 @@ export ACCESSOR_ARRAY=$(cat token_accessors.json | jq -r '.data.keys')
 # Convert ACCESSOR_ARRAY from JSON to something Bash can work with
 
 echo "${ACCESSOR_ARRAY}" | jq -r '.[]'
-export ACCESSOR_TEXT_LIST=(ACCESSOR_ARRAY | jq -r '.[]')
+export ACCESSOR_TEXT_LIST=$(echo ${ACCESSOR_ARRAY} | jq -r '.[]')
 echo accessor text list is $ACCESSOR_TEXT_LIST
 
 echo "Look up the Token Creation Time"
